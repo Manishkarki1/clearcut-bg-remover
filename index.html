@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ClearCut — Free Background Remover</title>
-    <meta
-      name="description"
-      content="Free, private background remover. Cut out image backgrounds in your browser — no upload, no account, no watermark. Export PNG, JPEG, or WEBP."
-    />
+    <title>Free Background Remover - ClearCut | High Quality Online BG Remover</title>
+    <meta name="description" content="Free high-quality background remover online. Remove image backgrounds instantly with ClearCut. No signup, no watermark, full resolution. 100% private — runs in your browser.">
     <link rel="canonical" href="https://clearcutremover.com/" />
     <link rel="icon" href="/clearcut-export.png" type="image/png" />
     <meta name="theme-color" content="#17171b" />
@@ -15,19 +12,19 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://clearcutremover.com/" />
-    <meta property="og:title" content="ClearCut — Free Background Remover" />
+    <meta property="og:title" content="Free Background Remover - ClearCut | High Quality Online BG Remover" />
     <meta
       property="og:description"
-      content="Remove image backgrounds in your browser. Private, free, no watermark."
+      content="Free high-quality background remover online. No signup, no watermark, full resolution. 100% private — runs in your browser."
     />
     <meta property="og:site_name" content="ClearCut" />
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="ClearCut — Free Background Remover" />
+    <meta name="twitter:title" content="Free Background Remover - ClearCut | High Quality Online BG Remover" />
     <meta
       name="twitter:description"
-      content="Remove image backgrounds in your browser. Private, free, no watermark."
+      content="Free high-quality background remover online. No signup, no watermark, full resolution. 100% private — runs in your browser."
     />
 
     <script type="application/ld+json">
@@ -36,7 +33,7 @@
         "@type": "WebApplication",
         "name": "ClearCut",
         "url": "https://clearcutremover.com",
-        "description": "Free, private background remover that runs entirely in your browser.",
+        "description": "Free high-quality background remover online. Remove image backgrounds instantly. No signup, no watermark, full resolution. 100% private — runs in your browser.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Any",
         "license": "https://www.gnu.org/licenses/agpl-3.0.html",
@@ -47,6 +44,54 @@
           "price": "0",
           "priceCurrency": "USD"
         }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is ClearCut really free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. ClearCut is a free background remover with no signup, no watermark, and no per-image fee. You can remove as many backgrounds as you want."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it reduce image quality?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. ClearCut keeps full resolution. Export as PNG for a lossless transparent cutout. JPEG and WEBP have an optional quality slider only if you want a smaller file."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are my photos uploaded to any server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Background removal runs entirely in your browser. Your photos are not uploaded to ClearCut or sent to a third-party API."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What image formats are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can upload JPG, PNG, and WEBP. Download as PNG (transparent), JPEG, or WEBP."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use it commercially?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Images you create with this free background remover are yours to use in commercial work. The AGPL-3.0 license applies to the ClearCut software, not to your exported photos."
+            }
+          }
+        ]
       }
     </script>
     <link rel="stylesheet" href="/src/style.css" />
@@ -80,22 +125,116 @@
       <main>
         <!-- Upload screen -->
         <section id="upload-screen" class="screen active">
-          <div id="dropzone" class="dropzone">
-            <input type="file" id="file-input" accept="image/*" hidden />
-            <div class="dropzone-inner">
-              <div class="dropzone-icon">🖼️</div>
-              <h2>Drop an image here</h2>
-              <p>or click to browse — JPG, PNG, WEBP</p>
-              <button id="browse-btn" class="btn primary">Choose Image</button>
+          <div class="hero">
+            <h1>Free High-Quality Background Remover Online</h1>
+            <p class="hero-lead">
+              Remove image backgrounds instantly with ClearCut. No signup, no watermark,
+              full resolution. 100% private — this free background remover runs entirely
+              in your browser.
+            </p>
+            <div id="dropzone" class="dropzone">
+              <input type="file" id="file-input" accept="image/*" hidden />
+              <div class="dropzone-inner">
+                <div class="dropzone-icon">🖼️</div>
+                <h2>Drop an image here</h2>
+                <p>or click to browse — JPG, PNG, WEBP</p>
+                <button id="browse-btn" class="btn primary">Choose Image</button>
+              </div>
             </div>
+            <p class="oss-note">
+              Free and open source.
+              Photos never leave your device.
+              <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Get the source</a>
+              ·
+              <a href="/license.html">AGPL-3.0</a>
+            </p>
           </div>
-          <p class="oss-note">
-            Free and open source.
-            Photos never leave your device.
-            <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Get the source</a>
-            ·
-            <a href="/license.html">AGPL-3.0</a>
-          </p>
+
+          <div class="landing">
+            <section class="landing-block" id="how-it-works" aria-labelledby="how-heading">
+              <h2 id="how-heading">How it works</h2>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <h3>Upload a photo</h3>
+                  <p>Drop a JPG, PNG, or WEBP onto the free background remover — or click to browse. Nothing is uploaded to a server.</p>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <h3>Remove the background</h3>
+                  <p>Click Remove Background. The AI runs on your device. Crop, erase, restore, or pick a new background color first if you want.</p>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <h3>Download full quality</h3>
+                  <p>Export a transparent PNG, JPEG, or WEBP at full resolution. No watermark, no signup, no daily limit.</p>
+                </li>
+              </ol>
+            </section>
+
+            <section class="landing-block" id="why-clearcut" aria-labelledby="why-heading">
+              <h2 id="why-heading">Why ClearCut is different</h2>
+              <ul class="why-grid">
+                <li>
+                  <h3>Free full quality</h3>
+                  <p>Other online BG removers lock full resolution behind a paywall. ClearCut exports the same quality you uploaded, every time.</p>
+                </li>
+                <li>
+                  <h3>Completely private — no upload</h3>
+                  <p>Your photos never leave this device. There is no cloud API and no image is sent to a third party.</p>
+                </li>
+                <li>
+                  <h3>No signup, no limits</h3>
+                  <p>No account, no credits, no watermark. Use this free background remover as often as you need.</p>
+                </li>
+                <li>
+                  <h3>Open source</h3>
+                  <p>ClearCut is AGPL-licensed. You can read the code, run it yourself, or
+                    <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">contribute on GitHub</a>.</p>
+                </li>
+              </ul>
+            </section>
+
+            <section class="landing-block" id="features" aria-labelledby="features-heading">
+              <h2 id="features-heading">Features</h2>
+              <ul class="feature-list">
+                <li>In-browser AI background removal (ONNX + WebAssembly)</li>
+                <li>Erase and Restore brushes to fix hair, edges, and leftovers</li>
+                <li>Crop tool with a live selection</li>
+                <li>Corner radius slider for rounded or circular cutouts</li>
+                <li>Transparent, white, black, or custom background colors</li>
+                <li>Undo, redo, and reset to the original photo</li>
+                <li>Export PNG, JPEG, or WEBP with an optional quality slider</li>
+                <li>Works on desktop, tablet, and phone</li>
+              </ul>
+            </section>
+
+            <section class="landing-block" id="faq" aria-labelledby="faq-heading">
+              <h2 id="faq-heading">Frequently asked questions</h2>
+              <div class="faq">
+                <details>
+                  <summary>Is ClearCut really free?</summary>
+                  <p>Yes. ClearCut is a free background remover with no signup, no watermark, and no per-image fee. Remove as many backgrounds as you want.</p>
+                </details>
+                <details>
+                  <summary>Does it reduce image quality?</summary>
+                  <p>No. You keep full resolution. PNG export is lossless and transparent. JPEG and WEBP include a quality slider only if you want a smaller file.</p>
+                </details>
+                <details>
+                  <summary>Are my photos uploaded to any server?</summary>
+                  <p>No. Processing runs entirely in your browser. Photos are not uploaded to ClearCut or sent to a third-party API. See the <a href="/privacy.html">privacy page</a>.</p>
+                </details>
+                <details>
+                  <summary>What image formats are supported?</summary>
+                  <p>Upload JPG, PNG, or WEBP. Download as PNG (transparent), JPEG, or WEBP.</p>
+                </details>
+                <details>
+                  <summary>Can I use it commercially?</summary>
+                  <p>Yes. Photos you export are yours to use in commercial work. The <a href="/license.html">AGPL-3.0 license</a> covers the ClearCut software, not your downloaded images.</p>
+                </details>
+              </div>
+            </section>
+          </div>
         </section>
 
         <!-- Editor screen -->
