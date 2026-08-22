@@ -1,0 +1,27 @@
+{
+  "name": "clearcut-bg-remover",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free, open-source, high-quality background remover that runs entirely in the browser.",
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Manishkarki1/clearcut-bg-remover.git"
+  },
+    "homepage": "https://clearcutremover.com",
+  "bugs": {
+    "url": "https://github.com/Manishkarki1/clearcut-bg-remover/issues"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.2.0"
+  },
+  "dependencies": {
+    "@imgly/background-removal": "^1.7.0"
+  }
+}

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClearCut — Free Background Remover</title>
+    <meta
+      name="description"
+      content="Free, private background remover. Cut out image backgrounds in your browser — no upload, no account, no watermark. Export PNG, JPEG, or WEBP."
+    />
+    <link rel="canonical" href="https://clearcutremover.com/" />
+    <link rel="icon" href="/clearcut-export.png" type="image/png" />
+    <meta name="theme-color" content="#17171b" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://clearcutremover.com/" />
+    <meta property="og:title" content="ClearCut — Free Background Remover" />
+    <meta
+      property="og:description"
+      content="Remove image backgrounds in your browser. Private, free, no watermark."
+    />
+    <meta property="og:site_name" content="ClearCut" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ClearCut — Free Background Remover" />
+    <meta
+      name="twitter:description"
+      content="Remove image backgrounds in your browser. Private, free, no watermark."
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ClearCut",
+        "url": "https://clearcutremover.com",
+        "description": "Free, private background remover that runs entirely in your browser.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+        "isAccessibleForFree": true,
+        "codeRepository": "https://github.com/Manishkarki1/clearcut-bg-remover",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="ClearCut home">
+          <img src="/clearcut-logo.png" alt="ClearCut" width="32" height="32">
+          <span class="brand-name">ClearCut</span>
+        </a>
+        <p class="tagline">Free, private, high-quality background removal — runs entirely in your browser.</p>
+        <nav class="header-nav" aria-label="Site">
+          <a href="/privacy.html" class="header-link">Privacy</a>
+          <a
+            href="https://github.com/Manishkarki1/clearcut-bg-remover"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="header-link"
+            title="View source on GitHub"
+            aria-label="View source on GitHub"
+          >
+            <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+            </svg>
+            <span class="header-link-label">Source</span>
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        <!-- Upload screen -->
+        <section id="upload-screen" class="screen active">
+          <div id="dropzone" class="dropzone">
+            <input type="file" id="file-input" accept="image/*" hidden />
+            <div class="dropzone-inner">
+              <div class="dropzone-icon">🖼️</div>
+              <h2>Drop an image here</h2>
+              <p>or click to browse — JPG, PNG, WEBP</p>
+              <button id="browse-btn" class="btn primary">Choose Image</button>
+            </div>
+          </div>
+          <p class="oss-note">
+            Free and open source.
+            Photos never leave your device.
+            <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Get the source</a>
+            ·
+            <a href="/license.html">AGPL-3.0</a>
+          </p>
+        </section>
+
+        <!-- Editor screen -->
+        <section id="editor-screen" class="screen">
+          <div class="editor-layout">
+            <aside class="toolbar">
+              <div class="tool-group">
+                <h3>Tools</h3>
+                <button class="tool-btn active" data-tool="none" title="Move / View">
+                  <span class="tool-icon">🖐️</span><span>Select</span>
+                </button>
+                <button class="tool-btn" data-tool="erase" title="Erase — paint away background remnants">
+                  <span class="tool-icon">🩹</span><span>Erase</span>
+                </button>
+                <button class="tool-btn" data-tool="restore" title="Restore — bring back original pixels">
+                  <span class="tool-icon">🖌️</span><span>Restore</span>
+                </button>
+                <button class="tool-btn" data-tool="crop" title="Crop the canvas">
+                  <span class="tool-icon">✂️</span><span>Crop</span>
+                </button>
+              </div>
+
+              <div class="tool-group" id="brush-settings">
+                <h3>Brush Size</h3>
+                <input type="range" id="brush-size" min="4" max="120" value="30" />
+                <div class="brush-size-label"><span id="brush-size-value">30</span>px</div>
+              </div>
+
+              <div class="tool-group" id="corner-radius-settings">
+                <h3>Corner Radius</h3>
+                <input type="range" id="corner-radius" min="0" max="50" value="0" />
+                <div class="brush-size-label"><span id="corner-radius-value">0</span>px</div>
+              </div>
+
+              <div class="tool-group">
+                <h3>Background</h3>
+                <div class="bg-swatches">
+                  <button class="swatch checkerboard active" data-bg="transparent" title="Transparent"></button>
+                  <button class="swatch" data-bg="#ffffff" style="background:#ffffff" title="White"></button>
+                  <button class="swatch" data-bg="#000000" style="background:#000000" title="Black"></button>
+                  <button class="swatch" data-bg="#2563eb" style="background:#2563eb" title="Blue"></button>
+                  <button class="swatch" data-bg="#16a34a" style="background:#16a34a" title="Green"></button>
+                  <button class="swatch custom-swatch" id="custom-color-swatch" title="Custom color">
+                    <input type="color" id="custom-color-input" value="#ff5c8a" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="tool-group">
+                <h3>History</h3>
+                <div class="history-btns">
+                  <button id="undo-btn" class="btn secondary" title="Undo (Ctrl+Z)">↶ Undo</button>
+                  <button id="redo-btn" class="btn secondary" title="Redo (Ctrl+Y)">↷ Redo</button>
+                </div>
+                <button id="reset-btn" class="btn secondary full">Reset to Original</button>
+              </div>
+
+              <div class="tool-group">
+                <button id="new-image-btn" class="btn ghost full">＋ New Image</button>
+              </div>
+            </aside>
+
+            <div class="canvas-area">
+              <div id="canvas-wrap" class="canvas-wrap checkerboard">
+                <canvas id="bg-canvas"></canvas>
+                <canvas id="main-canvas"></canvas>
+                <canvas id="crop-overlay"></canvas>
+                <button id="remove-bg-btn" class="remove-bg-fab" type="button">
+                  Remove Background
+                </button>
+              </div>
+              <div id="status-bar" class="status-bar">
+                <span id="status-text">Loading image…</span>
+                <div id="progress-track" class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+              </div>
+            </div>
+
+            <div class="right-panel">
+              <h3>Export</h3>
+              <label class="field-label">Format</label>
+              <select id="export-format">
+                <option value="image/png">PNG (transparent)</option>
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/webp">WEBP</option>
+              </select>
+
+              <label class="field-label">Quality</label>
+              <input type="range" id="export-quality" min="0.5" max="1" step="0.05" value="1" />
+
+              <button id="download-btn" class="btn primary full">⬇ Download Image</button>
+
+              <div id="crop-actions" class="crop-actions hidden">
+                <button id="crop-apply-btn" class="btn primary full">Apply Crop</button>
+                <button id="crop-cancel-btn" class="btn ghost full">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>Open source under <a href="/license.html">AGPL-3.0</a></span>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Source</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="/privacy.html">Privacy</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="https://github.com/Manishkarki1/clearcut-bg-remover/issues" target="_blank" rel="noopener noreferrer">Report an issue</a>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
