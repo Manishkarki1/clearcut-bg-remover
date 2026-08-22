@@ -529,62 +529,118 @@ main { flex: 1; min-height: 0; }
 .toolbar::-webkit-scrollbar-thumb, .right-panel::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
 
 @media (max-width: 860px) {
+  #app:has(#editor-screen.active) .site-footer { display: none; }
+
   .editor-layout {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
-  .canvas-area { order: 1; flex: 1 1 auto; min-height: 0; }
-  .toolbar { order: 2; border-bottom: 1px solid var(--line); }
-  .right-panel { order: 3; border-top: 1px solid var(--line); }
+  .toolbar { order: 1; }
+  .canvas-area { order: 2; flex: 1 1 auto; min-height: 0; }
+  .right-panel { order: 3; }
 
-  .toolbar, .right-panel {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 16px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 10px 14px;
+  .toolbar,
+  .right-panel {
+    flex-shrink: 0;
+    overflow: visible;
     border-right: none;
     border-left: none;
     max-height: none;
-    flex-shrink: 0;
   }
 
-  .tool-group { margin-bottom: 0; flex-shrink: 0; }
-  .tool-group h3 { display: none; }
+  .toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 12px 12px;
+    border-bottom: 1px solid var(--line);
+  }
 
-  .tool-group:first-child { display: flex; gap: 6px; }
+  .toolbar .tool-group {
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .toolbar .tool-group h3 {
+    margin-bottom: 6px;
+  }
+
+  .tools-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .tools-group h3 { display: none; }
+
   .tool-btn {
     flex-direction: column;
-    width: auto;
-    min-width: 58px;
-    min-height: 44px;
-    padding: 7px 8px;
-    gap: 3px;
-    font-size: 10.5px;
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 8px 4px;
+    gap: 4px;
+    font-size: 11px;
     text-align: center;
     margin-bottom: 0;
   }
-  .tool-icon { font-size: 18px; }
+  .tool-icon { font-size: 18px; width: auto; }
 
   #brush-settings,
-  #corner-radius-settings { min-width: 150px; }
+  #corner-radius-settings { min-width: 0; }
 
-  .bg-swatches { grid-template-columns: repeat(6, 36px); grid-auto-flow: column; gap: 6px; }
-  .swatch { width: 36px; height: 36px; }
+  .bg-swatches {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .swatch { width: 100%; height: auto; aspect-ratio: 1; }
 
-  .history-btns { grid-template-columns: auto auto; min-width: 190px; }
-  #reset-btn.full, #new-image-btn.full { width: auto; white-space: nowrap; margin-bottom: 0; min-height: 44px; }
+  .history-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .history-group h3 { display: none; }
+  .history-group .history-btns {
+    grid-column: 1 / -1;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+  #reset-btn.full,
+  #new-image-btn.full {
+    width: 100%;
+    margin-bottom: 0;
+    min-height: 44px;
+  }
 
-  .right-panel > * { flex-shrink: 0; }
-  #export-format { width: 150px; }
-  #download-btn { min-width: 160px; margin-top: 0; min-height: 44px; }
-  .crop-actions { min-width: 160px; margin-top: 0; padding-top: 0; border-top: none; display: flex; flex-direction: column; gap: 6px; }
-  .field-label { margin: 0 0 6px; }
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px 14px;
+    border-top: 1px solid var(--line);
+  }
+  .right-panel h3 { margin: 0 0 2px; }
+  .right-panel > * { flex-shrink: 0; width: 100%; }
+  .field-label { margin: 2px 0 4px; }
+  #export-format { width: 100%; }
+  #export-quality { width: 100%; }
+  #download-btn {
+    width: 100%;
+    margin-top: 6px;
+    min-height: 44px;
+  }
+  .crop-actions {
+    width: 100%;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
 
-  .canvas-wrap { margin: 12px; }
+  .canvas-wrap { margin: 10px 12px; }
+  .status-bar { padding: 0 12px 10px; }
 }
 
 .site-footer {

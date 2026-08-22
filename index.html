@@ -241,7 +241,7 @@
         <section id="editor-screen" class="screen">
           <div class="editor-layout">
             <aside class="toolbar">
-              <div class="tool-group">
+              <div class="tool-group tools-group">
                 <h3>Tools</h3>
                 <button class="tool-btn active" data-tool="none" title="Move / View">
                   <span class="tool-icon">🖐️</span><span>Select</span>
@@ -269,7 +269,7 @@
                 <div class="brush-size-label"><span id="corner-radius-value">0</span>px</div>
               </div>
 
-              <div class="tool-group">
+              <div class="tool-group bg-group">
                 <h3>Background</h3>
                 <div class="bg-swatches">
                   <button class="swatch checkerboard active" data-bg="transparent" title="Transparent"></button>
@@ -283,16 +283,13 @@
                 </div>
               </div>
 
-              <div class="tool-group">
+              <div class="tool-group history-group">
                 <h3>History</h3>
                 <div class="history-btns">
                   <button id="undo-btn" class="btn secondary" title="Undo (Ctrl+Z)">↶ Undo</button>
                   <button id="redo-btn" class="btn secondary" title="Redo (Ctrl+Y)">↷ Redo</button>
                 </div>
                 <button id="reset-btn" class="btn secondary full">Reset to Original</button>
-              </div>
-
-              <div class="tool-group">
                 <button id="new-image-btn" class="btn ghost full">＋ New Image</button>
               </div>
             </aside>
