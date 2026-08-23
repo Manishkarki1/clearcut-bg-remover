@@ -352,7 +352,7 @@ toolBtns.forEach((btn) => {
 function selectTool(tool) {
   currentTool = tool;
   toolBtns.forEach((b) => b.classList.toggle('active', b.dataset.tool === tool));
-  brushSettings.style.display = tool === 'erase' || tool === 'restore' ? 'block' : 'none';
+  brushSettings.classList.toggle('hidden', tool !== 'erase' && tool !== 'restore');
   canvasWrap.classList.toggle('cropping', tool === 'crop');
   cropOverlay.style.pointerEvents = tool === 'none' ? 'none' : 'auto';
   cropActions.classList.toggle('hidden', tool !== 'crop' || !cropRect);
