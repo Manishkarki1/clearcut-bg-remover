@@ -1,156 +1,201 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy — ClearCut</title>
-    <meta
-      name="description"
-      content="ClearCut processes images entirely in your browser. Nothing is uploaded. Read how we handle privacy."
-    />
-    <link rel="canonical" href="https://clearcutremover.com/privacy.html" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#17171b" />
-    <style>
-      :root {
-        --bg-deep: #17171b;
-        --bg-panel: #1f2024;
-        --line: #34353b;
-        --text-hi: #f2f1ee;
-        --text-mid: #a8a8b0;
-        --text-low: #6c6c74;
-        --accent: #2dd4c8;
-        --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
-        --font-body: Inter, 'Segoe UI', sans-serif;
-      }
-      * { box-sizing: border-box; }
-      html, body {
-        margin: 0;
-        min-height: 100%;
-        background: var(--bg-deep);
-        color: var(--text-hi);
-        font-family: var(--font-body);
-        line-height: 1.6;
-      }
-      .topbar {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 14px 24px;
-        border-bottom: 1px solid var(--line);
-        background: var(--bg-panel);
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--text-hi);
-        text-decoration: none;
-        font-family: var(--font-display);
-        font-weight: 700;
-        font-size: 19px;
-      }
-      .brand-mark { display: inline-block; transform: rotate(-12deg); }
-      .topbar { justify-content: space-between; }
-      .header-nav { display: flex; gap: 16px; }
-      .header-nav a { color: var(--text-mid); text-decoration: none; font-size: 13px; }
-      .header-nav a:hover { color: var(--accent); }
-      main {
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 40px 24px 80px;
-      }
-      h1 {
-        font-family: var(--font-display);
-        font-size: 32px;
-        letter-spacing: -0.02em;
-        margin: 0 0 8px;
-      }
-      .updated {
-        color: var(--text-low);
-        font-size: 13px;
-        margin: 0 0 32px;
-      }
-      h2 {
-        font-family: var(--font-display);
-        font-size: 18px;
-        margin: 28px 0 8px;
-      }
-      p, li { color: var(--text-mid); }
-      a { color: var(--accent); }
-    </style>
-  </head>
-  <body>
-    <header class="topbar">
-      <a class="brand" href="/">
-        <span class="brand-mark">✂️</span>
-        <span>ClearCut</span>
-      </a>
-      <nav class="header-nav">
-        <a href="/license.html">License</a>
-        <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Source</a>
-      </nav>
-    </header>
-    <main>
-      <h1>Privacy</h1>
-      <p class="updated">Last updated: 22 August 2026</p>
 
-      <p>
-        ClearCut is a free background remover at
-        <a href="https://clearcutremover.com">clearcutremover.com</a>.
-        This page explains what happens to your images and data.
-      </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy — ClearCut</title>
+  <meta name="description"
+    content="ClearCut processes images entirely in your browser. Nothing is uploaded. Read how we handle privacy." />
+  <link rel="canonical" href="https://clearcutremover.com/privacy.html" />
+  <link rel="icon" href="/clearcut-export.png" type="image/png" />
+  <meta name="theme-color" content="#17171b" />
+  <style>
+    :root {
+      --bg-deep: #17171b;
+      --bg-panel: #1f2024;
+      --line: #34353b;
+      --text-hi: #f2f1ee;
+      --text-mid: #a8a8b0;
+      --text-low: #6c6c74;
+      --accent: #2dd4c8;
+      --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+      --font-body: Inter, 'Segoe UI', sans-serif;
+    }
 
-      <h2>Your images stay on your device</h2>
-      <p>
-        Background removal runs entirely in your browser using on-device AI
-        (WebAssembly / WebGPU). When you choose a photo, it is processed locally.
-        We do not upload your images to our servers, and we do not send them to
-        a third-party API.
-      </p>
-      <p>
-        The finished file is saved only if you click Download — and that save
-        goes to your own computer or phone.
-      </p>
+    * {
+      box-sizing: border-box;
+    }
 
-      <h2>No accounts, no cookies for tracking</h2>
-      <p>
-        ClearCut has no sign-up and no user accounts. This site does not set
-        advertising or analytics cookies. We do not build a profile of you.
-      </p>
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg-deep);
+      color: var(--text-hi);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
 
-      <h2>What a host can see</h2>
-      <p>
-        Like any website, the server or CDN that delivers this static page may
-        log standard request data (for example IP address, browser type, and
-        the page you asked for) so the site can load and stay secure. Those
-        logs are not used to identify you for marketing, and they do not
-        include your photos.
-      </p>
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-panel);
+    }
 
-      <h2>Third-party code</h2>
-      <p>
-        The app loads fonts from Google Fonts and uses the open-source
-        <code>@imgly/background-removal</code> library. Model files needed for
-        removal are fetched by your browser and run locally. Your photos are
-        not sent to those vendors as part of processing.
-      </p>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-hi);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 19px;
+    }
 
-      <h2>Children</h2>
-      <p>
-        This tool is a general-purpose image editor. We do not knowingly
-        collect personal information from children.
-      </p>
+    .brand-mark {
+      display: inline-block;
+      transform: rotate(-12deg);
+    }
 
-      <h2>License and source</h2>
-      <p>
-        ClearCut is released under the
-        <a href="/license.html">GNU Affero General Public License v3.0 or later</a>.
-        The source is on
-        <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">GitHub</a>.
-      </p>
+    .topbar {
+      justify-content: space-between;
+    }
 
-      <p><a href="/">← Back to ClearCut</a></p>
-    </main>
-  </body>
+    .header-nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    .header-nav a {
+      color: var(--text-mid);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .header-nav a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+
+    .updated {
+      color: var(--text-low);
+      font-size: 13px;
+      margin: 0 0 32px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      margin: 28px 0 8px;
+    }
+
+    p,
+    li {
+      color: var(--text-mid);
+    }
+
+    a {
+      color: var(--accent);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="/clearcut-logo.png" alt="ClearCut" width="32" height="32">
+      <span>ClearCut</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/license.html">License</a>
+      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Source</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Privacy</h1>
+    <p class="updated">Last updated: 22 August 2026</p>
+
+    <p>
+      ClearCut is a free background remover at
+      <a href="https://clearcutremover.com">clearcutremover.com</a>.
+      This page explains what happens to your images and data.
+    </p>
+
+    <h2>Your images stay on your device</h2>
+    <p>
+      Background removal runs entirely in your browser using on-device AI
+      (WebAssembly / WebGPU). When you choose a photo, it is processed locally.
+      We do not upload your images to our servers, and we do not send them to
+      a third-party API.
+    </p>
+    <p>
+      The finished file is saved only if you click Download — and that save
+      goes to your own computer or phone.
+    </p>
+
+    <h2>Cookies and advertising</h2>
+    <p>
+      ClearCut itself does not use cookies to create user accounts or track uploaded images. However, we use Google
+      AdSense to support this free service. Google and its advertising partners may use cookies, web beacons, IP
+      addresses, or similar technologies to serve, personalize, and measure advertisements.
+    </p>
+    <p>Where required by law, such as for users in the EEA, United Kingdom, and Switzerland, visitors will be asked for
+      consent before personalized advertising technologies are used.</p>
+
+    <p> Users may manage their advertising preferences through Google's Ads Settings.</p>
+
+
+    <h2>What a host can see</h2>
+    <p>
+      Like any website, the server or CDN that delivers this static page may
+      log standard request data (for example IP address, browser type, and
+      the page you asked for) so the site can load and stay secure. Those
+      logs are not used to identify you for marketing, and they do not
+      include your photos.
+    </p>
+
+    <h2>Third-party code</h2>
+    <p>
+      The app loads fonts from Google Fonts and uses the open-source
+      <code>@imgly/background-removal</code> library. Model files needed for
+      removal are fetched by your browser and run locally. Your photos are
+      not sent to those vendors as part of processing.
+    </p>
+
+    <h2>Children</h2>
+    <p>
+      This tool is a general-purpose image editor. We do not knowingly
+      collect personal information from children.
+    </p>
+
+    <h2>License and source</h2>
+    <p>
+      ClearCut is released under the
+      <a href="/license.html">GNU Affero General Public License v3.0 or later</a>.
+      The source is on
+      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank"
+        rel="noopener noreferrer">GitHub</a>.
+    </p>
+
+    <p><a href="/">← Back to ClearCut</a></p>
+  </main>
+</body>
+
 </html>

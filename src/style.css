@@ -436,7 +436,7 @@ main { flex: 1; min-height: 0; }
   max-height: 100%;
 }
 #main-canvas { cursor: crosshair; }
-#crop-overlay { cursor: crosshair; touch-action: none; }
+#crop-overlay { cursor: crosshair; touch-action: none; z-index: 3; }
 
 .remove-bg-fab {
   position: absolute;
@@ -727,4 +727,99 @@ main { flex: 1; min-height: 0; }
   .canvas-wrap { margin: 6px 8px 4px; border-radius: 8px; }
   .remove-bg-fab { bottom: 36px; padding: 10px 14px; font-size: 13px; }
   .site-footer { padding: 8px 12px; }
+}
+
+/* ---------- Draw canvas ---------- */
+#draw-canvas {
+  pointer-events: none; /* enabled by JS when draw tool is active */
+  cursor: crosshair;
+  z-index: 2;
+  touch-action: none;
+}
+
+/* ---------- Draw & Annotate section separator ---------- */
+.draw-tools-group {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+/* ---------- Draw settings panel ---------- */
+.draw-color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.draw-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  margin-top: 8px;
+}
+
+.draw-color-input {
+  width: 36px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  padding: 2px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.draw-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.draw-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+.draw-swatch:hover,
+.draw-swatch.active {
+  transform: scale(1.2);
+  border-color: var(--accent);
+}
+
+/* ---------- Text annotation input overlay ---------- */
+.text-input-overlay {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: auto;
+}
+.text-input-overlay.hidden { display: none; }
+
+#text-annotation-input {
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: #fff;
+  outline: none;
+  min-width: 120px;
+  max-width: 340px;
+  caret-color: var(--accent);
+}
+#text-annotation-input::placeholder {
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+  font-size: 12px;
 }

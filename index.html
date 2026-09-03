@@ -248,8 +248,8 @@
         <div class="editor-layout">
           <aside class="toolbar">
             <div class="tool-group tools-group">
-              <h3>Tools</h3>
-              <button class="tool-btn active" data-tool="none" title="Move / View">
+              <h3>Edit Tools</h3>
+              <button class="tool-btn active" data-tool="none" title="Select &amp; Move — click to select annotations, drag to move">
                 <span class="tool-icon">🖐️</span><span>Select</span>
               </button>
               <button class="tool-btn" data-tool="erase" title="Erase — paint away background remnants">
@@ -261,6 +261,51 @@
               <button class="tool-btn" data-tool="crop" title="Crop the canvas">
                 <span class="tool-icon">✂️</span><span>Crop</span>
               </button>
+            </div>
+
+            <div class="tool-group tools-group draw-tools-group">
+              <h3>Draw &amp; Annotate</h3>
+              <button class="tool-btn" data-tool="draw-pencil" title="Pencil — freehand drawing">
+                <span class="tool-icon">✏️</span><span>Pencil</span>
+              </button>
+              <button class="tool-btn" data-tool="draw-line" title="Line — draw a straight line">
+                <span class="tool-icon">╱</span><span>Line</span>
+              </button>
+              <button class="tool-btn" data-tool="draw-rect" title="Rectangle — draw a rectangle outline">
+                <span class="tool-icon">⬜</span><span>Rect</span>
+              </button>
+              <button class="tool-btn" data-tool="draw-arrow" title="Arrow — draw an arrow">
+                <span class="tool-icon">➤</span><span>Arrow</span>
+              </button>
+              <button class="tool-btn" data-tool="draw-text" title="Text — click to add text label">
+                <span class="tool-icon">T</span><span>Text</span>
+              </button>
+              <button class="tool-btn" data-tool="draw-eraser" title="Eraser — erase drawings">
+                <span class="tool-icon">🗑️</span><span>Eraser</span>
+              </button>
+            </div>
+
+              <div id="draw-settings" class="tool-group hidden">
+              <h3>Draw Settings</h3>
+              <div class="draw-color-row">
+                <label class="draw-label">Color</label>
+                <input type="color" id="draw-color" value="#ff3b30" class="draw-color-input" />
+              </div>
+              <div class="draw-swatches">
+                <button class="draw-swatch" data-color="#ff3b30" style="background:#ff3b30" title="Red"></button>
+                <button class="draw-swatch" data-color="#ff9500" style="background:#ff9500" title="Orange"></button>
+                <button class="draw-swatch" data-color="#ffcc00" style="background:#ffcc00" title="Yellow"></button>
+                <button class="draw-swatch" data-color="#34c759" style="background:#34c759" title="Green"></button>
+                <button class="draw-swatch" data-color="#007aff" style="background:#007aff" title="Blue"></button>
+                <button class="draw-swatch" data-color="#ffffff" style="background:#ffffff;border-color:#555" title="White"></button>
+                <button class="draw-swatch" data-color="#000000" style="background:#000000" title="Black"></button>
+              </div>
+              <label class="draw-label size-label">Size <span id="draw-size-value">4</span>px</label>
+              <input type="range" id="draw-size" min="1" max="60" value="4" />
+              <label class="draw-label hidden" id="draw-text-label">Font Size <span id="draw-font-size-value">24</span>px</label>
+              <input type="range" id="draw-font-size" min="10" max="120" value="24" class="hidden" />
+              <label class="draw-label opacity-label">Opacity <span id="draw-opacity-value">100</span>%</label>
+              <input type="range" id="draw-opacity" min="10" max="100" value="100" />
             </div>
 
             <div class="tool-group hidden" id="brush-settings">
@@ -275,7 +320,7 @@
               <div class="brush-size-label"><span id="corner-radius-value">0</span>px</div>
             </div>
 
-            <div class="tool-group bg-group">
+            <div class="tool-group bg-group hidden" id="bg-settings">
               <h3>Background</h3>
               <div class="bg-swatches">
                 <button class="swatch checkerboard active" data-bg="transparent" title="Transparent"></button>
@@ -304,6 +349,7 @@
             <div id="canvas-wrap" class="canvas-wrap checkerboard">
               <canvas id="bg-canvas"></canvas>
               <canvas id="main-canvas"></canvas>
+              <canvas id="draw-canvas"></canvas>
               <canvas id="crop-overlay"></canvas>
               <button id="remove-bg-btn" class="remove-bg-fab" type="button">
                 Remove Background
@@ -330,6 +376,7 @@
             <input type="range" id="export-quality" min="0.5" max="1" step="0.05" value="1" />
 
             <button id="download-btn" class="btn primary full">⬇ Download Image</button>
+            <button id="clear-drawings-btn" class="btn ghost full hidden">🗑️ Clear Drawings</button>
 
             <div id="crop-actions" class="crop-actions hidden">
               <button id="crop-apply-btn" class="btn primary full">Apply Crop</button>
@@ -339,6 +386,11 @@
         </div>
       </section>
     </main>
+
+    <!-- Text annotation overlay — outside canvas-wrap so it isn't clipped -->
+    <div id="text-input-overlay" class="text-input-overlay hidden">
+      <input id="text-annotation-input" type="text" placeholder="Type and press Enter" autocomplete="off" />
+    </div>
 
     <footer class="site-footer">
       <span>Open source under <a href="/license.html">AGPL-3.0</a></span>

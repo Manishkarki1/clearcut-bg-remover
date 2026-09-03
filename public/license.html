@@ -1,142 +1,184 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>License — ClearCut</title>
-    <meta
-      name="description"
-      content="ClearCut is free and open source under the GNU Affero General Public License v3.0 or later."
-    />
-    <link rel="canonical" href="https://clearcutremover.com/license.html" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#17171b" />
-    <style>
-      :root {
-        --bg-deep: #17171b;
-        --bg-panel: #1f2024;
-        --line: #34353b;
-        --text-hi: #f2f1ee;
-        --text-mid: #a8a8b0;
-        --text-low: #6c6c74;
-        --accent: #2dd4c8;
-        --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
-        --font-body: Inter, 'Segoe UI', sans-serif;
-      }
-      * { box-sizing: border-box; }
-      html, body {
-        margin: 0;
-        min-height: 100%;
-        background: var(--bg-deep);
-        color: var(--text-hi);
-        font-family: var(--font-body);
-        line-height: 1.6;
-      }
-      .topbar {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 14px 24px;
-        border-bottom: 1px solid var(--line);
-        background: var(--bg-panel);
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--text-hi);
-        text-decoration: none;
-        font-family: var(--font-display);
-        font-weight: 700;
-        font-size: 19px;
-      }
-      .brand-mark { display: inline-block; transform: rotate(-12deg); }
-      .topbar { justify-content: space-between; }
-      .header-nav { display: flex; gap: 16px; }
-      .header-nav a { color: var(--text-mid); text-decoration: none; font-size: 13px; }
-      .header-nav a:hover { color: var(--accent); }
-      main {
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 40px 24px 80px;
-      }
-      h1 {
-        font-family: var(--font-display);
-        font-size: 32px;
-        letter-spacing: -0.02em;
-        margin: 0 0 8px;
-      }
-      .lede {
-        color: var(--text-low);
-        font-size: 13px;
-        margin: 0 0 32px;
-      }
-      h2 {
-        font-family: var(--font-display);
-        font-size: 18px;
-        margin: 28px 0 8px;
-      }
-      p, li { color: var(--text-mid); }
-      a { color: var(--accent); }
-    </style>
-  </head>
-  <body>
-    <header class="topbar">
-      <a class="brand" href="/">
-        <span class="brand-mark">✂️</span>
-        <span>ClearCut</span>
-      </a>
-      <nav class="header-nav">
-        <a href="/privacy.html">Privacy</a>
-        <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Source</a>
-      </nav>
-    </header>
-    <main>
-      <h1>License</h1>
-      <p class="lede">GNU Affero General Public License v3.0 or later</p>
 
-      <p>
-        ClearCut is free software: you can use it, study it, change it, and
-        share it. The program is licensed under the
-        <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU Affero General Public License v3.0 or later</a>.
-      </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>License — ClearCut</title>
+  <meta name="description"
+    content="ClearCut is free and open source under the GNU Affero General Public License v3.0 or later." />
+  <link rel="canonical" href="https://clearcutremover.com/license.html" />
+  <link rel="icon" href="/clearcut-export.png" type="image/png" />
+  <meta name="theme-color" content="#17171b" />
+  <style>
+    :root {
+      --bg-deep: #17171b;
+      --bg-panel: #1f2024;
+      --line: #34353b;
+      --text-hi: #f2f1ee;
+      --text-mid: #a8a8b0;
+      --text-low: #6c6c74;
+      --accent: #2dd4c8;
+      --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+      --font-body: Inter, 'Segoe UI', sans-serif;
+    }
 
-      <h2>Source code</h2>
-      <p>
-        Because this site offers ClearCut as a network service, AGPL requires
-        that you can get the corresponding source. The source for this site is
-        on GitHub:
-      </p>
-      <p>
-        <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">github.com/Manishkarki1/clearcut-bg-remover</a>
-      </p>
-      <p>
-        Bug reports and pull requests are welcome there.
-      </p>
+    * {
+      box-sizing: border-box;
+    }
 
-      <h2>What the license means in short</h2>
-      <ul>
-        <li>You may run and share ClearCut for any purpose.</li>
-        <li>You may modify it and host your own copy.</li>
-        <li>If you run a modified version as a public web service, you must also offer that modified source to the people who use it, under the same license.</li>
-        <li>There is no warranty.</li>
-      </ul>
-      <p>
-        This summary is not a substitute for the license.
-        Read the
-        <a href="/LICENSE">full AGPL-3.0 text</a>
-        for the binding terms.
-      </p>
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg-deep);
+      color: var(--text-hi);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
 
-      <h2>Credits</h2>
-      <p>
-        Background removal uses
-        <a href="https://github.com/imgly/background-removal-js" target="_blank" rel="noopener noreferrer">@imgly/background-removal</a>,
-        which is also AGPL-licensed. Fonts are loaded from Google Fonts
-        (Space Grotesk, Inter, JetBrains Mono).
-      </p>
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-panel);
+    }
 
-      <p><a href="/">← Back to ClearCut</a></p>
-    </main>
-  </body>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-hi);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 19px;
+    }
+
+    .brand-mark {
+      display: inline-block;
+      transform: rotate(-12deg);
+    }
+
+    .topbar {
+      justify-content: space-between;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    .header-nav a {
+      color: var(--text-mid);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .header-nav a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+
+    .lede {
+      color: var(--text-low);
+      font-size: 13px;
+      margin: 0 0 32px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      margin: 28px 0 8px;
+    }
+
+    p,
+    li {
+      color: var(--text-mid);
+    }
+
+    a {
+      color: var(--accent);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="/clearcut-logo.png" alt="ClearCut" width="32" height="32">
+      <span>ClearCut</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/privacy.html">Privacy</a>
+      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Source</a>
+    </nav>
+  </header>
+  <main>
+    <h1>License</h1>
+    <p class="lede">GNU Affero General Public License v3.0 or later</p>
+
+    <p>
+      ClearCut is free software: you can use it, study it, change it, and
+      share it. The program is licensed under the
+      <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU Affero General
+        Public License v3.0 or later</a>.
+    </p>
+
+    <h2>Source code</h2>
+    <p>
+      Because this site offers ClearCut as a network service, AGPL requires
+      that you can get the corresponding source. The source for this site is
+      on GitHub:
+    </p>
+    <p>
+      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank"
+        rel="noopener noreferrer">github.com/Manishkarki1/clearcut-bg-remover</a>
+    </p>
+    <p>
+      Bug reports and pull requests are welcome there.
+    </p>
+
+    <h2>What the license means in short</h2>
+    <ul>
+      <li>You may run and share ClearCut for any purpose.</li>
+      <li>You may modify it and host your own copy.</li>
+      <li>If you run a modified version as a public web service, you must also offer that modified source to the people
+        who use it, under the same license.</li>
+      <li>There is no warranty.</li>
+    </ul>
+    <p>
+      This summary is not a substitute for the license.
+      Read the
+      <a href="/LICENSE">full AGPL-3.0 text</a>
+      for the binding terms.
+    </p>
+
+    <h2>Credits</h2>
+    <p>
+      Background removal uses
+      <a href="https://github.com/imgly/background-removal-js" target="_blank"
+        rel="noopener noreferrer">@imgly/background-removal</a>,
+      which is also AGPL-licensed. Fonts are loaded from Google Fonts
+      (Space Grotesk, Inter, JetBrains Mono).
+    </p>
+
+    <p><a href="/">← Back to ClearCut</a></p>
+  </main>
+</body>
+
 </html>
