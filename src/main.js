@@ -142,6 +142,7 @@ let baseFittedHeight = 0;
 let zoomLevel = 1.0;
 let isPanning = false;
 let panStart = null;
+let isSpacePressed = false;
 // ---------- Utility ----------
 function setStatus(text) {
   if (statusText) statusText.textContent = text;
