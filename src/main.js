@@ -154,13 +154,12 @@ function setProgress(pct) {
 function updateCanvasContainerSize() {
   if (!mainCanvas.width || !mainCanvas.height || !canvasWrap) return;
   const wrapRect = canvasWrap.getBoundingClientRect();
-  let availableW = wrapRect.width - 40;
-  let availableH = wrapRect.height - 40;
+  let availableW = wrapRect.width - 32;
+  let availableH = wrapRect.height - 32;
 
   if (availableW <= 0 || availableH <= 0) {
-    availableW = Math.max(200, (canvasWrap.clientWidth || window.innerWidth - 460) - 40);
-    availableH = Math.max(200, (canvasWrap.clientHeight || window.innerHeight - 140) - 40);
-    requestAnimationFrame(updateCanvasContainerSize);
+    availableW = Math.max(200, (canvasWrap.clientWidth || window.innerWidth - 460) - 32);
+    availableH = Math.max(200, (canvasWrap.clientHeight || window.innerHeight - 140) - 32);
   }
 
   const imgW = mainCanvas.width;
@@ -1586,16 +1585,28 @@ if (canvasWrap) {
   }, { passive: false });
 
   window.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && document.activeElement !== textAnnotationInput && !isSpacePressed && editorScreen.classList.contains('active')) {
-      isSpacePressed = true;
-      canvasWrap.style.cursor = 'grab';
+    const isTextInput = document.activeElement && (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable);
+    if (e.code === 'Space' && !isTextInput && editorScreen.classList.contains('active')) {
+      e.preventDefault();
+      if (!isSpacePressed) {
+        isSpacePressed = true;
+        canvasWrap.style.cursor = 'grab';
+        if (canvasContainer) canvasContainer.style.pointerEvents = 'none';
+      }
     }
   });
 
   window.addEventListener('keyup', (e) => {
     if (e.code === 'Space') {
+      const isTextInput = document.activeElement && (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable);
+      if (!isTextInput) {
+        e.preventDefault();
+      }
       isSpacePressed = false;
+      isPanning = false;
+      panStart = null;
       canvasWrap.style.cursor = 'default';
+      if (canvasContainer) canvasContainer.style.pointerEvents = 'auto';
     }
   });
 
@@ -1603,8 +1614,9 @@ if (canvasWrap) {
     if (isSpacePressed || e.button === 1) {
       isPanning = true;
       panStart = { x: e.clientX, y: e.clientY, scrollLeft: canvasWrap.scrollLeft, scrollTop: canvasWrap.scrollTop };
-      canvasWrap.setPointerCapture(e.pointerId);
+      try { canvasWrap.setPointerCapture(e.pointerId); } catch (_) {}
       canvasWrap.style.cursor = 'grabbing';
+      e.preventDefault();
       e.stopPropagation();
     }
   }, true);
@@ -1615,17 +1627,18 @@ if (canvasWrap) {
       const dy = e.clientY - panStart.y;
       canvasWrap.scrollLeft = panStart.scrollLeft - dx;
       canvasWrap.scrollTop = panStart.scrollTop - dy;
+      e.preventDefault();
       e.stopPropagation();
     }
   }, true);
 
-  ['pointerup', 'pointercancel'].forEach((evt) => {
-    canvasWrap.addEventListener(evt, (e) => {
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((evt) => {
+    window.addEventListener(evt, (e) => {
       if (isPanning) {
         isPanning = false;
         panStart = null;
         canvasWrap.style.cursor = isSpacePressed ? 'grab' : 'default';
-        e.stopPropagation();
+        try { canvasWrap.releasePointerCapture(e.pointerId); } catch (_) {}
       }
     }, true);
   });

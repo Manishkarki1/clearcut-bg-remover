@@ -491,7 +491,6 @@ main { flex: 1; min-height: 0; }
   position: relative;
   flex-shrink: 0;
   margin: auto;
-  transition: width 0.12s ease-out, height 0.12s ease-out;
 }
 .canvas-container canvas {
   position: absolute;
@@ -628,7 +627,7 @@ main { flex: 1; min-height: 0; }
   .toolbar {
     order: 2;
     flex-shrink: 0;
-    max-height: 38vh;
+    max-height: 40vh;
     overflow-y: auto;
     padding: 6px 8px;
     border-top: 1px solid var(--line);
@@ -645,9 +644,10 @@ main { flex: 1; min-height: 0; }
     width: 100%;
   }
 
-  /* Horizontal scrollable tool selector rows */
-  .tools-group,
-  .draw-tools-group {
+  /* Tool selector buttons stay FIRST at the top of the mobile dock */
+  .tools-group {
+    order: 1;
+    flex-shrink: 0;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -657,17 +657,26 @@ main { flex: 1; min-height: 0; }
     padding: 2px 0;
     margin-bottom: 0;
   }
+  .draw-tools-group {
+    order: 2;
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    gap: 4px;
+    padding: 2px 0;
+    margin-bottom: 0;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
   .tools-group::-webkit-scrollbar,
   .draw-tools-group::-webkit-scrollbar { display: none; }
 
   .tools-group h3,
   .draw-tools-group h3 { display: none; }
-
-  .draw-tools-group {
-    border-top: none;
-    padding-top: 0;
-    margin-top: 0;
-  }
 
   .tool-btn {
     flex-direction: column;
@@ -684,9 +693,10 @@ main { flex: 1; min-height: 0; }
   }
   .tool-icon { font-size: 16px; width: auto; }
 
-  /* CONTEXTUAL TOOL SETTINGS SLIDERS / SWATCHES */
-  #brush-settings,
-  #corner-radius-settings {
+  /* CONTEXTUAL TOOL SETTINGS OPEN BELOW THE TOOL BUTTONS */
+  #brush-settings {
+    order: 3;
+    flex-shrink: 0;
     min-width: 0;
     display: flex;
     align-items: center;
@@ -696,25 +706,24 @@ main { flex: 1; min-height: 0; }
     background: var(--bg-panel-raised);
     border-radius: 8px;
   }
-  #brush-settings h3,
-  #corner-radius-settings h3 {
+  #brush-settings h3 {
     margin: 0;
     font-size: 10px;
     white-space: nowrap;
   }
-  #brush-settings input[type="range"],
-  #corner-radius-settings input[type="range"] {
+  #brush-settings input[type="range"] {
     flex: 1;
     margin: 0;
   }
-  #brush-settings .brush-size-label,
-  #corner-radius-settings .brush-size-label {
+  #brush-settings .brush-size-label {
     margin: 0;
     font-size: 11px;
     white-space: nowrap;
   }
 
   #draw-settings {
+    order: 3;
+    flex-shrink: 0;
     margin-bottom: 0;
     padding: 6px 8px;
     background: var(--bg-panel-raised);
@@ -724,10 +733,67 @@ main { flex: 1; min-height: 0; }
     gap: 4px;
   }
   #draw-settings h3 { display: none; }
-  .draw-color-row { margin-bottom: 0; }
-  .draw-swatches { margin-bottom: 0; gap: 5px; }
-  .draw-swatch { width: 22px; height: 22px; }
+  .draw-color-row {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .draw-swatches {
+    margin-bottom: 0;
+    gap: 6px;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 2px 0;
+  }
+  .draw-swatches::-webkit-scrollbar { display: none; }
+  .draw-swatch {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+  .draw-label {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 10px;
+  }
+  #draw-size, #draw-font-size, #draw-opacity {
+    height: 20px;
+    margin: 2px 0;
+  }
 
+  #corner-radius-settings {
+    order: 4;
+    flex-shrink: 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    padding: 4px 8px;
+    background: var(--bg-panel-raised);
+    border-radius: 8px;
+  }
+  #corner-radius-settings h3 {
+    margin: 0;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  #corner-radius-settings input[type="range"] {
+    flex: 1;
+    margin: 0;
+  }
+  #corner-radius-settings .brush-size-label {
+    margin: 0;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .bg-group {
+    order: 5;
+    flex-shrink: 0;
+  }
   .bg-group h3 { display: none; }
   .bg-swatches {
     display: flex;
@@ -737,6 +803,8 @@ main { flex: 1; min-height: 0; }
   .swatch { width: 30px; height: 30px; flex-shrink: 0; aspect-ratio: 1; }
 
   .history-group {
+    order: 6;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 4px;
