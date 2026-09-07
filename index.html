@@ -346,20 +346,28 @@
           </aside>
 
           <div class="canvas-area">
+            <div id="zoom-controls" class="zoom-controls" aria-label="Zoom controls">
+              <button id="zoom-out-btn" class="zoom-btn" title="Zoom Out (Ctrl + -)" aria-label="Zoom out">−</button>
+              <button id="zoom-reset-btn" class="zoom-reset-btn" title="Reset Zoom (100%)" aria-label="Reset zoom">100%</button>
+              <button id="zoom-in-btn" class="zoom-btn" title="Zoom In (Ctrl + +)" aria-label="Zoom in">＋</button>
+              <button id="zoom-fit-btn" class="zoom-btn" title="Fit to View" aria-label="Fit to view">⛶</button>
+            </div>
             <div id="canvas-wrap" class="canvas-wrap checkerboard">
-              <canvas id="bg-canvas"></canvas>
-              <canvas id="main-canvas"></canvas>
-              <canvas id="draw-canvas"></canvas>
-              <canvas id="crop-overlay"></canvas>
-              <button id="remove-bg-btn" class="remove-bg-fab" type="button">
-                Remove Background
-              </button>
+              <div id="canvas-container" class="canvas-container">
+                <canvas id="bg-canvas"></canvas>
+                <canvas id="main-canvas"></canvas>
+                <canvas id="draw-canvas"></canvas>
+                <canvas id="crop-overlay"></canvas>
+              </div>
             </div>
             <div id="status-bar" class="status-bar">
               <span id="status-text">Loading image…</span>
               <div id="progress-track" class="progress-track">
                 <div id="progress-fill" class="progress-fill"></div>
               </div>
+              <button id="remove-bg-btn" class="remove-bg-btn" type="button">
+                Remove Background
+              </button>
             </div>
           </div>
 

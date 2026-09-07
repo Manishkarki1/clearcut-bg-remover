@@ -22,10 +22,16 @@ const mainCanvas = document.getElementById('main-canvas');
 const drawCanvas = document.getElementById('draw-canvas');
 const cropOverlay = document.getElementById('crop-overlay');
 const canvasWrap = document.getElementById('canvas-wrap');
+const canvasContainer = document.getElementById('canvas-container');
 const bgCtx = bgCanvas.getContext('2d');
 const mainCtx = mainCanvas.getContext('2d', { willReadFrequently: true });
 const drawCtx = drawCanvas.getContext('2d');
 const cropCtx = cropOverlay.getContext('2d');
+
+const zoomOutBtn = document.getElementById('zoom-out-btn');
+const zoomResetBtn = document.getElementById('zoom-reset-btn');
+const zoomInBtn = document.getElementById('zoom-in-btn');
+const zoomFitBtn = document.getElementById('zoom-fit-btn');
 
 const textInputOverlay = document.getElementById('text-input-overlay');
 const textAnnotationInput = document.getElementById('text-annotation-input');
@@ -130,20 +136,89 @@ let loadedFileName = 'image';
 // Shorthand
 let hasDrawings = false;
 
+// ---------- Zoom & Pan state ----------
+let baseFittedWidth = 0;
+let baseFittedHeight = 0;
+let zoomLevel = 1.0;
+let isPanning = false;
+let panStart = null;
 // ---------- Utility ----------
 function setStatus(text) {
-  statusText.textContent = text;
+  if (statusText) statusText.textContent = text;
 }
 function setProgress(pct) {
-  progressFill.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+  if (progressFill) progressFill.style.width = `${Math.max(0, Math.min(100, pct))}%`;
 }
 
-function sizeCanvases(w, h) {
+function updateCanvasContainerSize() {
+  if (!mainCanvas.width || !mainCanvas.height || !canvasWrap) return;
+  const wrapRect = canvasWrap.getBoundingClientRect();
+  let availableW = wrapRect.width - 40;
+  let availableH = wrapRect.height - 40;
+
+  if (availableW <= 0 || availableH <= 0) {
+    availableW = Math.max(200, (canvasWrap.clientWidth || window.innerWidth - 460) - 40);
+    availableH = Math.max(200, (canvasWrap.clientHeight || window.innerHeight - 140) - 40);
+    requestAnimationFrame(updateCanvasContainerSize);
+  }
+
+  const imgW = mainCanvas.width;
+  const imgH = mainCanvas.height;
+
+  const scale = Math.min(availableW / imgW, availableH / imgH);
+  baseFittedWidth = imgW * scale;
+  baseFittedHeight = imgH * scale;
+
+  applyZoom();
+}
+
+function setZoom(newZoom, pivot = null) {
+  const clamped = Math.max(0.25, Math.min(5.0, Math.round(newZoom * 100) / 100));
+  const oldZoom = zoomLevel;
+  zoomLevel = clamped;
+
+  if (zoomResetBtn) {
+    zoomResetBtn.textContent = `${Math.round(zoomLevel * 100)}%`;
+  }
+
+  const containerW = baseFittedWidth * zoomLevel;
+  const containerH = baseFittedHeight * zoomLevel;
+
+  const oldScrollLeft = canvasWrap.scrollLeft;
+  const oldScrollTop = canvasWrap.scrollTop;
+
+  if (canvasContainer) {
+    canvasContainer.style.width = `${containerW}px`;
+    canvasContainer.style.height = `${containerH}px`;
+  }
+
+  if (pivot && oldZoom > 0) {
+    const wrapRect = canvasWrap.getBoundingClientRect();
+    const cursorX = pivot.x - wrapRect.left;
+    const cursorY = pivot.y - wrapRect.top;
+    const targetX = oldScrollLeft + cursorX;
+    const targetY = oldScrollTop + cursorY;
+    const ratio = zoomLevel / oldZoom;
+    canvasWrap.scrollLeft = targetX * ratio - cursorX;
+    canvasWrap.scrollTop = targetY * ratio - cursorY;
+  }
+
+  applyCornerRadiusPreview();
+}
+
+function applyZoom(pivot = null) {
+  setZoom(zoomLevel, pivot);
+}
+
+function sizeCanvases(w, h, resetZoom = false) {
   [bgCanvas, mainCanvas, drawCanvas, cropOverlay, originalCanvas].forEach((c) => {
     c.width = w;
     c.height = h;
   });
-  requestAnimationFrame(applyCornerRadiusPreview);
+  if (resetZoom) {
+    zoomLevel = 1.0;
+  }
+  updateCanvasContainerSize();
 }
 
 function cornerRadiusPx() {
@@ -327,7 +402,7 @@ async function handleFile(file) {
   resetTool();
   setBgSwatch(null, null, true);
 
-  sizeCanvases(img.naturalWidth, img.naturalHeight);
+  sizeCanvases(img.naturalWidth, img.naturalHeight, true);
   originalCtx.clearRect(0, 0, originalCanvas.width, originalCanvas.height);
   originalCtx.drawImage(img, 0, 0);
   initialOriginalImg = img;
@@ -850,9 +925,11 @@ drawCanvas.addEventListener('pointerdown', (e) => {
       selectDragLast = p;
       drawCanvas.setPointerCapture(e.pointerId);
       drawCanvas.style.cursor = 'grabbing';
+      updateDrawSettingsForSelectedObject(hit);
     } else {
       selectedObjectId = null;
       isSelectDragging = false;
+      updateDrawSettingsForSelectedObject(null);
     }
     renderDrawCanvas();
     return;
@@ -972,6 +1049,71 @@ clearDrawingsBtn.addEventListener('click', () => {
 // ---------- Text annotation ----------
 let pendingTextPos = null;
 
+function showDrawSettingsForTextEdit(obj) {
+  drawSettings.classList.remove('hidden');
+  drawSettings.querySelector('.draw-color-row').classList.remove('hidden');
+  drawSettings.querySelector('.draw-swatches').classList.remove('hidden');
+  drawOpacityInput.classList.remove('hidden');
+  drawSettings.querySelector('label.draw-label.opacity-label').classList.remove('hidden');
+  const sizeLabelEl = drawSettings.querySelector('label.draw-label.size-label');
+  if (sizeLabelEl) sizeLabelEl.classList.add('hidden');
+  drawSizeInput.classList.add('hidden');
+  drawFontSizeLabel.classList.remove('hidden');
+  drawFontSizeInput.classList.remove('hidden');
+
+  if (obj) {
+    drawColor = obj.color;
+    drawColorInput.value = obj.color;
+    drawSwatches.forEach((s) => s.classList.toggle('active', s.dataset.color === obj.color));
+
+    drawFontSize = obj.fontSize;
+    drawFontSizeInput.value = String(obj.fontSize);
+    drawFontSizeValue.textContent = String(obj.fontSize);
+
+    drawOpacity = obj.opacity ?? 1.0;
+    const opPct = Math.round(drawOpacity * 100);
+    drawOpacityInput.value = String(opPct);
+    drawOpacityValue.textContent = String(opPct);
+  }
+}
+
+function updateDrawSettingsForSelectedObject(obj) {
+  if (!obj) {
+    if (!DRAW_TOOLS.includes(currentTool)) {
+      drawSettings.classList.add('hidden');
+    }
+    return;
+  }
+  if (obj.type === 'draw-text') {
+    showDrawSettingsForTextEdit(obj);
+  } else {
+    drawSettings.classList.remove('hidden');
+    const isEraser = obj.type === 'draw-eraser';
+    drawSettings.querySelector('.draw-color-row').classList.toggle('hidden', isEraser);
+    drawSettings.querySelector('.draw-swatches').classList.toggle('hidden', isEraser);
+    drawOpacityInput.classList.toggle('hidden', isEraser);
+    drawSettings.querySelector('label.draw-label.opacity-label').classList.toggle('hidden', isEraser);
+    const sizeLabelEl = drawSettings.querySelector('label.draw-label.size-label');
+    if (sizeLabelEl) sizeLabelEl.classList.remove('hidden');
+    drawSizeInput.classList.remove('hidden');
+    drawFontSizeLabel.classList.add('hidden');
+    drawFontSizeInput.classList.add('hidden');
+
+    drawColor = obj.color;
+    drawColorInput.value = obj.color;
+    drawSwatches.forEach((s) => s.classList.toggle('active', s.dataset.color === obj.color));
+
+    drawSize = obj.size || 4;
+    drawSizeInput.value = String(drawSize);
+    drawSizeValue.textContent = String(drawSize);
+
+    drawOpacity = obj.opacity ?? 1.0;
+    const opPct = Math.round(drawOpacity * 100);
+    drawOpacityInput.value = String(opPct);
+    drawOpacityValue.textContent = String(opPct);
+  }
+}
+
 function editTextObject(obj) {
   beginEdit();
   editingTextObj = obj;
@@ -988,6 +1130,9 @@ function editTextObject(obj) {
   textAnnotationInput.style.color = obj.color;
   textAnnotationInput.value = obj.text;
   textInputOverlay.classList.remove('hidden');
+
+  showDrawSettingsForTextEdit(obj);
+
   renderDrawCanvas();
   requestAnimationFrame(() => {
     textAnnotationInput.focus();
@@ -1021,6 +1166,9 @@ function hideTextInput() {
     renderDrawCanvas();
   }
   strokeBeforeSnapshot = null;
+  if (!DRAW_TOOLS.includes(currentTool) && !selectedObjectId) {
+    drawSettings.classList.add('hidden');
+  }
 }
 
 function commitTextAnnotation() {
@@ -1090,26 +1238,59 @@ textAnnotationInput.addEventListener('blur', () => {
 });
 
 // ---------- Draw tool controls ----------
-drawColorInput.addEventListener('input', () => { drawColor = drawColorInput.value; });
+function updateSelectedObjectColor(color) {
+  drawColor = color;
+  drawColorInput.value = drawColor;
+  drawSwatches.forEach((s) => s.classList.toggle('active', s.dataset.color === drawColor));
+
+  const targetObj = editingTextObj || (selectedObjectId ? drawObjects.find(o => o.id === selectedObjectId) : null);
+  if (targetObj) {
+    targetObj.color = drawColor;
+    if (editingTextObj) {
+      textAnnotationInput.style.color = drawColor;
+    }
+    renderDrawCanvas();
+  }
+}
+
+drawColorInput.addEventListener('input', () => { updateSelectedObjectColor(drawColorInput.value); });
 drawSwatches.forEach((sw) => {
-  sw.addEventListener('click', () => {
-    drawColor = sw.dataset.color;
-    drawColorInput.value = drawColor;
-    drawSwatches.forEach((s) => s.classList.remove('active'));
-    sw.classList.add('active');
-  });
+  sw.addEventListener('click', () => { updateSelectedObjectColor(sw.dataset.color); });
 });
+
 drawSizeInput.addEventListener('input', () => {
   drawSize = Number(drawSizeInput.value);
   drawSizeValue.textContent = drawSize;
+  const targetObj = selectedObjectId ? drawObjects.find(o => o.id === selectedObjectId) : null;
+  if (targetObj && targetObj.type !== 'draw-text') {
+    targetObj.size = drawSize;
+    renderDrawCanvas();
+  }
 });
+
 drawFontSizeInput.addEventListener('input', () => {
   drawFontSize = Number(drawFontSizeInput.value);
   drawFontSizeValue.textContent = drawFontSize;
+  const targetObj = editingTextObj || (selectedObjectId ? drawObjects.find(o => o.id === selectedObjectId) : null);
+  if (targetObj && targetObj.type === 'draw-text') {
+    targetObj.fontSize = drawFontSize;
+    if (editingTextObj) {
+      const canvasRect = drawCanvas.getBoundingClientRect();
+      const scaleY = canvasRect.height / drawCanvas.height;
+      textAnnotationInput.style.fontSize = `${Math.max(12, drawFontSize * scaleY)}px`;
+    }
+    renderDrawCanvas();
+  }
 });
+
 drawOpacityInput.addEventListener('input', () => {
   drawOpacity = Number(drawOpacityInput.value) / 100;
   drawOpacityValue.textContent = drawOpacityInput.value;
+  const targetObj = editingTextObj || (selectedObjectId ? drawObjects.find(o => o.id === selectedObjectId) : null);
+  if (targetObj) {
+    targetObj.opacity = drawOpacity;
+    renderDrawCanvas();
+  }
 });
 
 function paintDot(p) {
@@ -1289,7 +1470,16 @@ window.addEventListener('keydown', (e) => {
     renderDrawCanvas();
     updateClearDrawingsBtn();
     commitEdit();
-  }
+    } else if (key === '=' || key === '+') {
+      e.preventDefault();
+      setZoom(zoomLevel * 1.25);
+    } else if (key === '-') {
+      e.preventDefault();
+      setZoom(zoomLevel / 1.25);
+    } else if (key === '0') {
+      e.preventDefault();
+      setZoom(1.0);
+    }
 });
 
 resetBtn.addEventListener('click', () => {
@@ -1297,7 +1487,7 @@ resetBtn.addEventListener('click', () => {
   beginEdit();
   const img = new Image();
   img.onload = () => {
-    sizeCanvases(initialCutout.w, initialCutout.h);
+    sizeCanvases(initialCutout.w, initialCutout.h, true);
     mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
     mainCtx.drawImage(img, 0, 0);
     originalCtx.clearRect(0, 0, originalCanvas.width, originalCanvas.height);
@@ -1379,8 +1569,69 @@ exportQuality.disabled = exportFormat.value === 'image/png';
 undoBtn.disabled = true;
 redoBtn.disabled = true;
 
+// ---------- Zoom & Pan Event Listeners ----------
+if (zoomInBtn) zoomInBtn.addEventListener('click', () => setZoom(zoomLevel * 1.25));
+if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => setZoom(zoomLevel / 1.25));
+if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => setZoom(1.0));
+if (zoomFitBtn) zoomFitBtn.addEventListener('click', () => setZoom(1.0));
+
+if (canvasWrap) {
+  canvasWrap.addEventListener('wheel', (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const factor = e.deltaY < 0 ? 1.15 : 0.85;
+      setZoom(zoomLevel * factor, { x: e.clientX, y: e.clientY });
+    }
+  }, { passive: false });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && document.activeElement !== textAnnotationInput && !isSpacePressed && editorScreen.classList.contains('active')) {
+      isSpacePressed = true;
+      canvasWrap.style.cursor = 'grab';
+    }
+  });
+
+  window.addEventListener('keyup', (e) => {
+    if (e.code === 'Space') {
+      isSpacePressed = false;
+      canvasWrap.style.cursor = 'default';
+    }
+  });
+
+  canvasWrap.addEventListener('pointerdown', (e) => {
+    if (isSpacePressed || e.button === 1) {
+      isPanning = true;
+      panStart = { x: e.clientX, y: e.clientY, scrollLeft: canvasWrap.scrollLeft, scrollTop: canvasWrap.scrollTop };
+      canvasWrap.setPointerCapture(e.pointerId);
+      canvasWrap.style.cursor = 'grabbing';
+      e.stopPropagation();
+    }
+  }, true);
+
+  canvasWrap.addEventListener('pointermove', (e) => {
+    if (isPanning && panStart) {
+      const dx = e.clientX - panStart.x;
+      const dy = e.clientY - panStart.y;
+      canvasWrap.scrollLeft = panStart.scrollLeft - dx;
+      canvasWrap.scrollTop = panStart.scrollTop - dy;
+      e.stopPropagation();
+    }
+  }, true);
+
+  ['pointerup', 'pointercancel'].forEach((evt) => {
+    canvasWrap.addEventListener(evt, (e) => {
+      if (isPanning) {
+        isPanning = false;
+        panStart = null;
+        canvasWrap.style.cursor = isSpacePressed ? 'grab' : 'default';
+        e.stopPropagation();
+      }
+    }, true);
+  });
+}
+
 if (typeof ResizeObserver === 'function') {
-  new ResizeObserver(() => applyCornerRadiusPreview()).observe(canvasWrap);
+  new ResizeObserver(() => updateCanvasContainerSize()).observe(canvasWrap);
 } else {
-  window.addEventListener('resize', applyCornerRadiusPreview);
+  window.addEventListener('resize', updateCanvasContainerSize);
 }

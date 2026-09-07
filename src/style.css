@@ -398,14 +398,72 @@ main { flex: 1; min-height: 0; }
   width: 140%; height: 140%; border: none; padding: 0; cursor: pointer; background: transparent;
 }
 
-/* ---------- Canvas area ---------- */
+/* ---------- Canvas area & Zoom ---------- */
 .canvas-area {
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 0;
   background: var(--bg-deep);
+  position: relative;
 }
+
+.zoom-controls {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(23, 23, 27, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 3px 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.zoom-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-mid);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.zoom-btn:hover {
+  background: var(--bg-panel-raised);
+  color: var(--text-hi);
+}
+
+.zoom-reset-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-hi);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  min-width: 48px;
+  text-align: center;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.zoom-reset-btn:hover {
+  background: var(--bg-panel-raised);
+  color: var(--accent);
+}
+
 .canvas-wrap {
   flex: 1;
   min-height: 0;
@@ -415,7 +473,7 @@ main { flex: 1; min-height: 0; }
   position: relative;
   margin: 20px;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: auto;
   border: 1px solid var(--line);
 }
 .canvas-wrap.checkerboard {
@@ -428,38 +486,41 @@ main { flex: 1; min-height: 0; }
   background-position: 0 0, 0 11px, 11px -11px, -11px 0px;
   background-color: #1b1b20;
 }
-.canvas-wrap canvas {
+
+.canvas-container {
+  position: relative;
+  flex-shrink: 0;
+  margin: auto;
+  transition: width 0.12s ease-out, height 0.12s ease-out;
+}
+.canvas-container canvas {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 #main-canvas { cursor: crosshair; }
 #crop-overlay { cursor: crosshair; touch-action: none; z-index: 3; }
 
-.remove-bg-fab {
-  position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  z-index: 6;
+.remove-bg-btn {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 14px;
-  padding: 12px 22px;
+  font-size: 13px;
+  padding: 7px 16px;
   border: none;
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--accent);
   color: #0b1a19;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   transition: transform .08s ease, filter .12s ease, opacity .12s ease;
 }
-.remove-bg-fab:hover { filter: brightness(1.08); }
-.remove-bg-fab:active { transform: translateX(-50%) scale(0.97); }
-.remove-bg-fab:disabled {
+.remove-bg-btn:hover { filter: brightness(1.08); }
+.remove-bg-btn:active { transform: scale(0.97); }
+.remove-bg-btn:disabled {
   opacity: 0.55;
   cursor: not-allowed;
   filter: none;
@@ -680,6 +741,9 @@ main { flex: 1; min-height: 0; }
     padding: 0;
     z-index: 5;
     pointer-events: none;
+  }
+  .status-bar > * {
+    pointer-events: auto;
   }
   #status-text {
     background: rgba(23, 23, 27, 0.72);
