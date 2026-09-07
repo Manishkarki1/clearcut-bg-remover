@@ -52,42 +52,50 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Is ClearCut really free?",
+            "name": "Is ClearCut really 100% free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. ClearCut is a free background remover with no signup, no watermark, and no per-image fee. You can remove as many backgrounds as you want."
+              "text": "Yes. ClearCut is completely free with no hidden subscriptions, no per-image fee, no mandatory account registration, and no watermark on your exported images."
             }
           },
           {
             "@type": "Question",
-            "name": "Does it reduce image quality?",
+            "name": "Does ClearCut reduce photo resolution?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. ClearCut keeps full resolution. Export as PNG for a lossless transparent cutout. JPEG and WEBP have an optional quality slider only if you want a smaller file."
+              "text": "No. ClearCut exports images at their full original resolution. Lossless PNG export maintains transparent cutouts without compression artifacts."
             }
           },
           {
             "@type": "Question",
-            "name": "Are my photos uploaded to any server?",
+            "name": "Are my images uploaded to any remote server?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Background removal runs entirely in your browser. Your photos are not uploaded to ClearCut or sent to a third-party API."
+              "text": "No. All AI processing runs locally inside your web browser using WebAssembly. Your uploaded photos never leave your device."
             }
           },
           {
             "@type": "Question",
-            "name": "What image formats are supported?",
+            "name": "What image file formats are supported?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You can upload JPG, PNG, and WEBP. Download as PNG (transparent), JPEG, or WEBP."
+              "text": "You can upload JPG, JPEG, PNG, or WEBP files and export cutouts as PNG (transparent), JPEG, or WEBP."
             }
           },
           {
             "@type": "Question",
-            "name": "Can I use it commercially?",
+            "name": "Can I use exported images for commercial work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Images you create with this free background remover are yours to use in commercial work. The AGPL-3.0 license applies to the ClearCut software, not to your exported photos."
+              "text": "Yes. Images created using ClearCut belong to you and can be used freely for personal, commercial, e-commerce, or advertising projects."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does ClearCut work on mobile phones and tablets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! ClearCut is fully responsive and optimized for touch interactions on smartphones, tablets, laptops, and desktop computers."
             }
           }
         ]
@@ -105,7 +113,10 @@
       </a>
       <p class="tagline">Free, private, high-quality background removal — runs entirely in your browser.</p>
       <nav class="header-nav" aria-label="Site">
+        <a href="/about.html" class="header-link">About</a>
         <a href="/privacy.html" class="header-link">Privacy</a>
+        <a href="/terms.html" class="header-link">Terms</a>
+        <a href="/contact.html" class="header-link">Contact</a>
         <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer"
           class="header-link" title="View source on GitHub" aria-label="View source on GitHub">
           <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true">
@@ -171,6 +182,70 @@
             </ol>
           </section>
 
+          <section class="landing-block" id="use-cases" aria-labelledby="use-cases-heading">
+            <h2 id="use-cases-heading">Popular Use Cases</h2>
+            <ul class="why-grid">
+              <li>
+                <h3>E-Commerce & Online Stores</h3>
+                <p>Create clean white or transparent backgrounds for product listings on Amazon, Shopify, eBay, and Etsy to boost conversion rates.</p>
+              </li>
+              <li>
+                <h3>Profile Avatars & Headshots</h3>
+                <p>Isolate portraits for LinkedIn, Twitter, Slack, and professional resumes with precise hair edge detection.</p>
+              </li>
+              <li>
+                <h3>Graphic Design & Marketing</h3>
+                <p>Extract objects and subjects for flyers, banners, YouTube thumbnails, and social media ad campaigns.</p>
+              </li>
+              <li>
+                <h3>ID & Passport Photos</h3>
+                <p>Swap plain background colors to meet passport, visa, or official ID photo background color requirements.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="landing-block" id="comparison" aria-labelledby="comparison-heading">
+            <h2 id="comparison-heading">ClearCut vs Traditional Online BG Removers</h2>
+            <div class="comparison-table-wrap">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th class="highlight">ClearCut</th>
+                    <th>Other Online Tools</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Privacy & Security</strong></td>
+                    <td class="highlight">100% Local (No Upload)</td>
+                    <td>Uploaded to Cloud Servers</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Export Resolution</strong></td>
+                    <td class="highlight">100% Full Original Size</td>
+                    <td>Downscaled / Paywalled HD</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Watermark</strong></td>
+                    <td class="highlight">None (Clean Output)</td>
+                    <td>Watermarked on Free Tier</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cost & Signup</strong></td>
+                    <td class="highlight">100% Free / No Account</td>
+                    <td>Subscription / Monthly Credits</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Built-in Editor</strong></td>
+                    <td class="highlight">Full Draw, Text & Crop Tools</td>
+                    <td>Basic or Locked behind Pro</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           <section class="landing-block" id="why-clearcut" aria-labelledby="why-heading">
             <h2 id="why-heading">Why ClearCut is different</h2>
             <ul class="why-grid">
@@ -202,12 +277,13 @@
             <ul class="feature-list">
               <li>In-browser AI background removal (ONNX + WebAssembly)</li>
               <li>Erase and Restore brushes to fix hair, edges, and leftovers</li>
-              <li>Crop tool with a live selection</li>
+              <li>Crop tool with a live selection overlay</li>
               <li>Corner radius slider for rounded or circular cutouts</li>
               <li>Transparent, white, black, or custom background colors</li>
+              <li>Draw tools: Pencil, Line, Rectangle, Arrow, Text annotations, and Eraser</li>
               <li>Undo, redo, and reset to the original photo</li>
               <li>Export PNG, JPEG, or WEBP with an optional quality slider</li>
-              <li>Works on desktop, tablet, and phone</li>
+              <li>Fully responsive interface for mobile, tablet, and desktop</li>
             </ul>
           </section>
 
@@ -237,6 +313,10 @@
                 <summary>Can I use it commercially?</summary>
                 <p>Yes. Photos you export are yours to use in commercial work. The <a href="/license.html">AGPL-3.0
                     license</a> covers the ClearCut software, not your downloaded images.</p>
+              </details>
+              <details>
+                <summary>Does ClearCut work offline?</summary>
+                <p>Once the web app loads in your browser, the neural network model runs locally on your device hardware using WebAssembly, meaning it works even with poor internet connectivity.</p>
               </details>
             </div>
           </section>
@@ -285,7 +365,7 @@
               </button>
             </div>
 
-              <div id="draw-settings" class="tool-group hidden">
+            <div id="draw-settings" class="tool-group hidden">
               <h3>Draw Settings</h3>
               <div class="draw-color-row">
                 <label class="draw-label">Color</label>
@@ -401,11 +481,17 @@
     </div>
 
     <footer class="site-footer">
-      <span>Open source under <a href="/license.html">AGPL-3.0</a></span>
+      <a href="/about.html">About Us</a>
       <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Source</a>
+      <a href="/privacy.html">Privacy Policy</a>
       <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="/contact.html">Contact Us</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="/license.html">License (AGPL-3.0)</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">Source Code</a>
       <span class="footer-sep" aria-hidden="true">·</span>
       <a href="https://github.com/Manishkarki1/clearcut-bg-remover/issues" target="_blank"
         rel="noopener noreferrer">Report an issue</a>

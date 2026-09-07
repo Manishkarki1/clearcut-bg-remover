@@ -240,6 +240,40 @@ main { flex: 1; min-height: 0; }
   font-size: 14px;
 }
 
+.comparison-table-wrap {
+  overflow-x: auto;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+.comparison-table th,
+.comparison-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.comparison-table th {
+  background: var(--bg-panel);
+  color: var(--text-hi);
+  font-family: var(--font-display);
+  font-size: 14px;
+}
+.comparison-table td {
+  color: var(--text-mid);
+}
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+.comparison-table .highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .oss-note {
   margin: 0;
   max-width: 560px;

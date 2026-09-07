@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>License — ClearCut</title>
+  <title>Contact Us — ClearCut</title>
   <meta name="description"
-    content="ClearCut is free and open source under the GNU Affero General Public License v3.0 or later." />
-  <link rel="canonical" href="https://clearcutremover.com/license.html" />
+    content="Contact the ClearCut team for questions, feedback, bug reports, or feature requests." />
+  <link rel="canonical" href="https://clearcutremover.com/contact.html" />
   <link rel="icon" href="/clearcut-export.png" type="image/png" />
   <meta name="theme-color" content="#17171b" />
   <style>
@@ -40,6 +40,7 @@
     .topbar {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 16px;
       padding: 14px 24px;
       border-bottom: 1px solid var(--line);
@@ -57,15 +58,6 @@
       font-size: 19px;
     }
 
-    .brand-mark {
-      display: inline-block;
-      transform: rotate(-12deg);
-    }
-
-    .topbar {
-      justify-content: space-between;
-    }
-
     .header-nav {
       display: flex;
       gap: 16px;
@@ -77,7 +69,8 @@
       font-size: 13px;
     }
 
-    .header-nav a:hover {
+    .header-nav a:hover,
+    .header-nav a.active {
       color: var(--accent);
     }
 
@@ -94,9 +87,9 @@
       margin: 0 0 8px;
     }
 
-    .lede {
-      color: var(--text-low);
-      font-size: 13px;
+    .subtitle {
+      color: var(--text-mid);
+      font-size: 15px;
       margin: 0 0 32px;
     }
 
@@ -104,15 +97,39 @@
       font-family: var(--font-display);
       font-size: 18px;
       margin: 28px 0 8px;
+      color: var(--text-hi);
     }
 
     p,
     li {
       color: var(--text-mid);
+      font-size: 15px;
     }
 
     a {
       color: var(--accent);
+    }
+
+    .contact-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .contact-card h3 {
+      margin-top: 0;
+      color: var(--text-hi);
+    }
+
+    .footer-nav {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
     }
   </style>
 </head>
@@ -127,61 +144,44 @@
       <a href="/about.html">About</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/license.html" class="active">License</a>
+      <a href="/contact.html" class="active">Contact</a>
+      <a href="/license.html">License</a>
       <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
   </header>
+
   <main>
-    <h1>License</h1>
-    <p class="lede">GNU Affero General Public License v3.0 or later</p>
+    <h1>Contact Us</h1>
+    <p class="subtitle">Have questions, feedback, bug reports, or feature suggestions? We'd love to hear from you.</p>
 
-    <p>
-      ClearCut is free software: you can use it, study it, change it, and
-      share it. The program is licensed under the
-      <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">GNU Affero General
-        Public License v3.0 or later</a>.
-    </p>
+    <div class="contact-card">
+      <h3>Get in Touch</h3>
+      <p>
+        For general inquiries, technical questions, or business partnership requests, feel free to email us directly:
+      </p>
+      <p>
+        📧 <strong>Email:</strong> <a href="mailto:support@clearcutremover.com">support@clearcutremover.com</a>
+      </p>
+    </div>
 
-    <h2>Source code</h2>
-    <p>
-      Because this site offers ClearCut as a network service, AGPL requires
-      that you can get the corresponding source. The source for this site is
-      on GitHub:
-    </p>
-    <p>
-      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank"
-        rel="noopener noreferrer">github.com/Manishkarki1/clearcut-bg-remover</a>
-    </p>
-    <p>
-      Bug reports and pull requests are welcome there.
-    </p>
+    <div class="contact-card">
+      <h3>Open Source Bug Reports & Code Contributions</h3>
+      <p>
+        If you encountered a software bug, want to request an editor tool feature, or want to contribute code to the
+        ClearCut repository:
+      </p>
+      <p>
+        <strong>GitHub Repository:</strong> <a href="https://github.com/Manishkarki1/clearcut-bg-remover"
+          target="_blank" rel="noopener noreferrer">github.com/Manishkarki1/clearcut-bg-remover</a>
+      </p>
+    </div>
 
-    <h2>What the license means in short</h2>
-    <ul>
-      <li>You may run and share ClearCut for any purpose.</li>
-      <li>You may modify it and host your own copy.</li>
-      <li>If you run a modified version as a public web service, you must also offer that modified source to the people
-        who use it, under the same license.</li>
-      <li>There is no warranty.</li>
-    </ul>
-    <p>
-      This summary is not a substitute for the license.
-      Read the
-      <a href="/LICENSE">full AGPL-3.0 text</a>
-      for the binding terms.
-    </p>
-
-    <h2>Credits</h2>
-    <p>
-      Background removal uses
-      <a href="https://github.com/imgly/background-removal-js" target="_blank"
-        rel="noopener noreferrer">@imgly/background-removal</a>,
-      which is also AGPL-licensed. Fonts are loaded from Google Fonts
-      (Space Grotesk, Inter, JetBrains Mono).
-    </p>
-
-    <p><a href="/">← Back to ClearCut</a></p>
+    <div class="footer-nav">
+      <a href="/">← Back to ClearCut Editor</a>
+      <a href="/about.html">About Us</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+    </div>
   </main>
 </body>
 

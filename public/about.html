@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — ClearCut Background Remover</title>
+  <meta name="description"
+    content="Learn more about ClearCut — a free, open-source, on-device AI background remover built for total privacy and full quality." />
+  <link rel="canonical" href="https://clearcutremover.com/about.html" />
+  <link rel="icon" href="/clearcut-export.png" type="image/png" />
+  <meta name="theme-color" content="#17171b" />
+  <style>
+    :root {
+      --bg-deep: #17171b;
+      --bg-panel: #1f2024;
+      --line: #34353b;
+      --text-hi: #f2f1ee;
+      --text-mid: #a8a8b0;
+      --text-low: #6c6c74;
+      --accent: #2dd4c8;
+      --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+      --font-body: Inter, 'Segoe UI', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg-deep);
+      color: var(--text-hi);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-panel);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-hi);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 19px;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    .header-nav a {
+      color: var(--text-mid);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .header-nav a:hover,
+    .header-nav a.active {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+
+    .subtitle {
+      color: var(--text-mid);
+      font-size: 16px;
+      margin: 0 0 32px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      margin: 28px 0 12px;
+      color: var(--text-hi);
+    }
+
+    p,
+    li {
+      color: var(--text-mid);
+      font-size: 15px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .footer-nav {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="/clearcut-logo.png" alt="ClearCut" width="32" height="32">
+      <span>ClearCut</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/about.html" class="active">About</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/license.html">License</a>
+      <a href="https://github.com/Manishkarki1/clearcut-bg-remover" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>About ClearCut</h1>
+    <p class="subtitle">Next-generation background removal that respects user privacy and keeps your images at 100% full quality.</p>
+
+    <h2>Our Mission</h2>
+    <p>
+      ClearCut was built with a simple goal: to eliminate paywalls, watermarks, resolution limits, and privacy compromises from online background removal tools. Most existing web tools send your personal photos to remote cloud servers, compress your output resolution unless you pay a subscription, or stamp your images with intrusive watermarks.
+    </p>
+    <p>
+      ClearCut changes that by performing <strong>100% of image processing directly inside your browser</strong> using WebAssembly and WebGPU neural network runtimes. Your photos never leave your device.
+    </p>
+
+    <h2>Why Choose ClearCut?</h2>
+    <ul>
+      <li><strong>Complete Privacy:</strong> Zero cloud uploads. Your images remain private on your computer or smartphone.</li>
+      <li><strong>Original Resolution Export:</strong> Export your cutouts at the exact size and DPI of your original photo. No artificial downscaling.</li>
+      <li><strong>Built-in Canvas Editor:</strong> Touch up edges with precision erase and restore brushes, add text, draw shapes, or crop your image in one place.</li>
+      <li><strong>Open Source & Free:</strong> ClearCut is open-source under the AGPL-3.0 license. Anyone can inspect our code, host it, or contribute on GitHub.</li>
+    </ul>
+
+    <h2>How It Works Under the Hood</h2>
+    <p>
+      ClearCut utilizes advanced deep learning segmentation models compiled into ONNX format and executed locally in Javascript via WebAssembly. When you upload a photo, your local CPU or GPU identifies the main subject and calculates precise alpha matte masks in real time without sending bytes over the internet.
+    </p>
+
+    <div class="footer-nav">
+      <a href="/">← Back to ClearCut Editor</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/contact.html">Contact Us</a>
+    </div>
+  </main>
+</body>
+
+</html>
